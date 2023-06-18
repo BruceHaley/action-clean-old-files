@@ -15,6 +15,7 @@ git checkout -b ${branch_name};
 cd ${DIR};
 for file in *.* ;
 do
+  echo ${file};
   dateFile=$(echo ${file} | tr -dc '0-9');
   dateCreated=$(date -d ${dateFile::-6} +%s)
   days=$(( (now - dateCreated) / 86400 ))

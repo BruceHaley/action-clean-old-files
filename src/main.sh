@@ -13,7 +13,7 @@ git checkout -b ${branch_name};
 
 # borrar los archivos con más de x dias de antiguedad
 cd ${DIR};
-for file in *.php ;
+for file in *.json ;
 do
   dateFile=$(echo ${file} | tr -dc '0-9');
   dateCreated=$(date -d ${dateFile::-6} +%s)

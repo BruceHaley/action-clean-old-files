@@ -21,7 +21,7 @@ do
   echo "file=" ${file};
 
   # Get the timestamp of the last commit that modified this file
-  LAST_MODIFIED_TIMESTAMP=$(git log -1 --format="%at" -- "${file}")
+  LAST_MODIFIED_TIMESTAMP=$(git log -1 --format="%at" -- "${DIR}/${file}")
   echo "LAST_MODIFIED_TIMESTAMP=" $LAST_MODIFIED_TIMESTAMP
 
   if [ "$LAST_MODIFIED_TIMESTAMP" -lt "$X_DAYS_AGO_TIMESTAMP" ]

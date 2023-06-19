@@ -18,11 +18,12 @@ echo "X_DAYS_AGO_TIMESTAMP=" $X_DAYS_AGO_TIMESTAMP
 cd ${DIR};
 for file in *.* ;
 do
-  echo "file=" "./${file}";
-  echo "log -1=" $(git log --full-history -- "./${file}")
+  cd /;
+  echo "file=" "${DIR}/${file}";
+  echo "log -1=" $(git log --full-history -- "${DIR}/${file}")
 
   # Get the timestamp of the last commit that modified this file
-  LAST_MODIFIED_TIMESTAMP=$(git log -1 --format="%at" -- "./${file}")
+  LAST_MODIFIED_TIMESTAMP=$(git log -1 --format="%at" -- "${DIR}/${file}")
   echo "LAST_MODIFIED_TIMESTAMP=" $LAST_MODIFIED_TIMESTAMP
 
   if [ "$LAST_MODIFIED_TIMESTAMP" -lt "$X_DAYS_AGO_TIMESTAMP" ]

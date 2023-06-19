@@ -11,16 +11,18 @@ branch_name=delete_old_migrations_${now}
 
 git checkout -b ${branch_name};
 
+X_DAYS_AGO_TIMESTAMP=$(date -d "${DAYS} days ago" +%s)
+
 # borrar los archivos con más de x dias de antiguedad
 cd ${DIR};
 for file in *.* ;
 do
   echo "file=" + ${file};
-  dateFile=$(echo ${file} | tr -dc '0-9');
-  echo "dateFile=" + ${dateFile};
-  dateCreated=$(date -d ${dateFile::-6} +%s)
-  days=$(( (now - dateCreated) / 86400 ))
-  if [ $days -gt ${DAYS} ]
+
+  # Get the timestamp of the last commit that modified this file
+  LAST_MODIFIED_TIMESTAMP=$(git log -1 --format="%at" -- "$file")
+
+  if [ "$LAST_MODIFIED_TIMESTAMP" -lt "$X_DAYS_AGO_TIMESTAMP" ]
   then
     rm -v $file
   fi

@@ -15,10 +15,9 @@ X_DAYS_AGO_TIMESTAMP=$(date -d "${DAYS} days ago" +%s)
 echo "X_DAYS_AGO_TIMESTAMP=" $X_DAYS_AGO_TIMESTAMP
 
 # borrar los archivos con más de x dias de antiguedad
-cd ${DIR};
-for file in *.* ;
+# cd ${DIR};
+for file in ${DIR}/*.* ;
 do
-  cd /;
   echo "file=" "${DIR}/${file}";
   echo "log -1=" $(git log --full-history -- "${DIR}/${file}")
 
@@ -28,7 +27,7 @@ do
 
   if [ "$LAST_MODIFIED_TIMESTAMP" -lt "$X_DAYS_AGO_TIMESTAMP" ]
   then
-    rm -v $file
+    # rm -v $file
     echo "Removed"
   fi
 done;

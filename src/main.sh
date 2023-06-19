@@ -19,7 +19,8 @@ echo "X_DAYS_AGO_TIMESTAMP=" $X_DAYS_AGO_TIMESTAMP
 for file in ${DIR}/*.* ;
 do
   echo "file=" "${file}";
-  echo "git log=" $(git log --full-history -- "./${file}")
+  # echo "git log=" $(git log --full-history -- "./${file}")
+  echo "git log=" $(git log -20  ${DIR}")
 
   # Get the timestamp of the last commit that modified this file
   LAST_MODIFIED_TIMESTAMP=$(git log -1 --format="%at" -- "./${file}")
